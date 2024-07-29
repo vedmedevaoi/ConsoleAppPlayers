@@ -5,7 +5,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import ru.inno.course.player.ext.BeforeEachDemo;
 import ru.inno.course.player.ext.MyTestWatcher;
 import ru.inno.course.player.ext.PlayersAndPointsProvider;
 import ru.inno.course.player.ext.PointsProvider;
@@ -17,17 +16,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
-import java.util.NoSuchElementException;
-
 
 import static org.junit.jupiter.api.Assertions.*;
 
 // 1. Тест не должен настраивать свое окружение.
 // 2. Главный код ничего не знает про тесты.
-// 3. В тестах не должно быть if'ов
+// 3. В тестах не должно быть if'ов.
 
 @ExtendWith(MyTestWatcher.class)
-//@ExtendWith(BeforeEachDemo.class)
 public class PlayerServiceTest {
     private PlayerService service;
     private static final String NICKNAME = "Nikita";
@@ -69,7 +65,7 @@ public class PlayerServiceTest {
     }
 
     @Test
-    @Tags({ @Tag("негативный"), @Tag("CRITICAL") } )
+    @Tags({@Tag("негативный"), @Tag("CRITICAL")})
     @DisplayName("Нельзя получить несуществующего пользователя")
     public void iCannotGetEmptyUser() {
         assertThrows(IllegalArgumentException.class, () -> service.getPlayerById(9999));
@@ -78,7 +74,7 @@ public class PlayerServiceTest {
     @ParameterizedTest
     @ValueSource(ints = {10, 100, -50, 0, 100, -5000000})
     @DisplayName("Добавление очков игроку")
-    public void iCanAddPoints(int points){
+    public void iCanAddPoints(int points) {
         int playerId = service.createPlayer(NICKNAME);
         service.addPoints(playerId, points);
         Player playerById = service.getPlayerById(playerId);
@@ -88,7 +84,7 @@ public class PlayerServiceTest {
     @ParameterizedTest
     @ArgumentsSource(PointsProvider.class)
     @DisplayName("Добавление очков игроку")
-    public void iCanAddPoints2(int pointsToAdd, int pointsToBe){
+    public void iCanAddPoints2(int pointsToAdd, int pointsToBe) {
         int playerId = service.createPlayer(NICKNAME);
         service.addPoints(playerId, pointsToAdd);
         Player playerById = service.getPlayerById(playerId);
@@ -98,7 +94,7 @@ public class PlayerServiceTest {
     @ParameterizedTest
     @ArgumentsSource(PlayersAndPointsProvider.class)
     @DisplayName("Добавление очков игроку c ненулевым балансом")
-    public void iCanAddPoints3(Player player, int pointsToAdd, int pointsToBe){
+    public void iCanAddPoints3(Player player, int pointsToAdd, int pointsToBe) {
         int id = service.createPlayer(player.getNick());
         service.addPoints(id, player.getPoints());
 
