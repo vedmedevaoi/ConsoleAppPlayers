@@ -10,4 +10,6 @@ public interface DataProvider {
     void save(Collection<Player> players) throws IOException;
 
     Collection<Player> load() throws IOException;
+
+    Object getPlayers();
 }
