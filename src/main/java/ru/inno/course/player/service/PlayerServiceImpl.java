@@ -102,4 +102,17 @@ public class PlayerServiceImpl implements PlayerService {
         }
     }
 
+    public void addPlayer(Player player) {
+    }
+
+    public void removePlayer(Player player) {
+    }
+
+    public List<Player> getAllPlayers() {
+        return allPlayers;
+    }
+
+    public void setAllPlayers(List<Player> allPlayers) {
+        this.allPlayers = allPlayers;
+    }
 }
